@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from functools import lru_cache
 
 class Settings(BaseSettings):
@@ -14,8 +14,9 @@ class Settings(BaseSettings):
     SECRET_KEY : str = '5ZhRhFEwqLrIwGdc11bpzWPlP24Xwc6n'
     ALGORITHM : str = "HS512"
     
-    class Config:
-        case_sensitive : bool = True
+    model_config = {
+        'case_sensitive': True
+    }
 
 @lru_cache
 def get_Settings() -> Settings:

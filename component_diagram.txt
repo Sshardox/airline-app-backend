@@ -1,0 +1,73 @@
++---------------------------------------------+
+|                                             |
+|              AIRLINE APP BACKEND            |
+|                                             |
++---------------------------------------------+
+                      |
+                      |
+    +----------------+|+----------------+
+    |                 |                 |
+    v                 v                 v
++----------+    +-----------+    +------------+
+|          |    |           |    |            |
+|   AUTH   |<-->|   CORE    |<-->|  DATABASE  |
+|          |    |           |    |            |
++----------+    +-----------+    +------------+
+    ^                ^                 ^
+    |                |                 |
+    |                |                 |
+    v                v                 v
++----------+    +-----------+    +------------+
+|          |    |           |    |            |
+|   USER   |<-->|  BOOKING  |<-->|  CATALOG   |
+|          |    |           |    |            |
++----------+    +-----------+    +------------+
+
+Component Descriptions:
+----------------------
+
+1. AUTH:
+   - Handles user authentication and authorization
+   - Manages login functionality and token generation
+   - Depends on USER module for user verification
+
+2. CORE:
+   - Contains application configuration
+   - Implements security features (JWT token handling)
+   - Provides hashing utilities for passwords
+   - Central component that connects other modules
+
+3. DATABASE:
+   - Manages database connections and sessions
+   - Defines base models for SQLAlchemy
+   - Provides database access utilities
+
+4. USER:
+   - Manages user data and operations
+   - Handles user registration, updates, and deletion
+   - Stores user credentials and profile information
+
+5. BOOKING:
+   - Manages flight bookings
+   - Handles creation, retrieval, and cancellation of bookings
+   - Links users to flights through booking records
+
+6. CATALOG:
+   - Manages flight information
+   - Provides flight search functionality
+   - Stores flight details (departure/arrival, times, prices)
+
+Relationships:
+-------------
+- AUTH depends on USER for authentication and CORE for security
+- USER depends on DATABASE for data persistence
+- BOOKING depends on USER (customer info) and CATALOG (flight info)
+- All modules depend on CORE for configuration and utilities
+- All modules depend on DATABASE for data storage and retrieval
+
+API Flow:
+--------
+1. Client authenticates through AUTH module
+2. Authenticated requests access USER, BOOKING, or CATALOG endpoints
+3. Data is persisted and retrieved through DATABASE module
+4. CORE provides security and configuration throughout

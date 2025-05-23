@@ -26,8 +26,9 @@ class CatalogUpdate(CatalogBase):
 
 class CatalogInDBBase(CatalogBase):
     id : int
-    class Config:
-        orm_mode = True
+    model_config = {
+        'from_attributes': True
+    }
 
 class Catalog(CatalogInDBBase):
     pass

@@ -1,22 +1,23 @@
-FROM python:3.9 as requirements-stage
+FROM python:3.13 as requirements-stage
 
 WORKDIR /tmp
 
-# Install Poetry with specific version and configure it
-RUN pip install poetry==1.4.2 && \
-    poetry config virtualenvs.create false
+# Copy requirements file directly instead of using poetry
+COPY ./backend/requirements.txt /tmp/requirements.txt
 
-COPY ./backend/app/pyproject.toml ./backend/app/poetry.lock* /tmp/
-
-# Make sure we're in the directory with pyproject.toml
-WORKDIR /tmp
-# Export dependencies with additional flags to ensure success
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes --no-interaction
-
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.11-slim
 
 COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt && \
+    # Install bcrypt for passlib
+    pip install bcrypt
 
 COPY ./backend/app /app
+
+# Configure environment variables for database connection
+ENV DATABASE_USERNAME=postgres \
+    DATABASE_PASSWORD=123123 \
+    DATABASE_HOST=db \
+    DATABASE_PORT=5432 \
+    DATABASE_NAME=mydb
