@@ -1,22 +1,9 @@
 # Airline Booking Application
 
 ## Authors
-- Juan David Orozco 2019214012
-- Yeiker Ruiz 2019214069
+- Juan David Orozco 
+- Yeiker Ruiz de León
 
-## Project Structure
-The project is organized as follows:
-- `backend/`: Contains the backend application code
-  - `app/`: Contains the FastAPI application
-    - `auth/`: Authentication module
-    - `booking/`: Booking module
-    - `catalog/`: Catalog module
-    - `core/`: Core functionality
-    - `database/`: Database models and connection
-    - `user/`: User management module
-    - `main.py`: Main application entry point
-- `Dockerfile`: Docker configuration for the application
-- `docker-compose.yml`: Docker Compose configuration for the application and database
 
 ## Running the Application
 
@@ -58,7 +45,7 @@ This will start the application and the PostgreSQL database. The application wil
    - Username: postgres
    - Password: 123123
    - Host: localhost
-   - Port: 6548
+   - Port: 5432
    - Database name: mydb
 
    You can override these by setting environment variables:
