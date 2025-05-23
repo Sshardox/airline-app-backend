@@ -1,4 +1,4 @@
-FROM python:3.13 as requirements-stage
+FROM python:3.11 as requirements-stage
 
 WORKDIR /tmp
 
@@ -9,9 +9,10 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.11-slim
 
 COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt && \
-    # Install bcrypt for passlib
-    pip install bcrypt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --upgrade -r /app/requirements.txt && \
+    # Install bcrypt for passlib with specific version
+    pip install bcrypt==4.0.1
 
 COPY ./backend/app /app
 
