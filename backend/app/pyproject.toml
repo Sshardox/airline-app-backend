@@ -2,10 +2,10 @@
 name = "app-airline"
 version = "0.1.0"
 description = ""
-authors = ["juandoro <juanorozcodc@gmail.com>"]
+authors = ["Sshardox"]
 
 [tool.poetry.dependencies]
-python = "3.9.8"
+python = "^3.9"
 fastapi = "^0.76.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
 SQLAlchemy = "^1.4.36"

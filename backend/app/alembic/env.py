@@ -14,11 +14,11 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-from app.core.config import settings
-from app.database.session import Base
-from app.booking.models import Booking
-from app.catalog.models import Flight
-from app.user.models import User
+from core.config import settings
+from database.session import Base
+from booking.models import Booking
+from catalog.models import Flight
+from user.models import User
 
 # add your model's MetaData object here
 # for 'autogenerate' support
